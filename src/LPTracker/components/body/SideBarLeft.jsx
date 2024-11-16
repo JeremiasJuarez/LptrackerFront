@@ -6,12 +6,12 @@ export const SideBarLeft = () => {
     
       <div className="container-fluid">
         
-        <div className="row buttonContainer">
-          <button className="countButton">Start Count</button>
-        </div>
         
         <div className="row currentLPContainer">
           <span className="lpBalance">LP Balance</span>
+          <button className="refreshButton">
+            Refresh <i className="fa-solid fa-arrows-rotate"></i>
+          </button>
         </div>
 
         <div className="row lpCountContianer">
@@ -29,6 +29,9 @@ export const SideBarLeft = () => {
             <br />
             <span>Diamond IV { 10 } LP</span>
           </div>
+        </div>
+        <div className="row buttonContainer">
+          <button className="countButton">Track</button>
         </div>
       </div>
 

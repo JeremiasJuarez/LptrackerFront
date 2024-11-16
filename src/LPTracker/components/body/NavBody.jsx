@@ -5,8 +5,8 @@ export const NavBody = () => {
     <div className="navBody">
       <img src="src/imgs/evelyn.png" alt="sumIcon" className="sumIcon"/>
 
-      <div style={{ marginLeft: "1rem" }}>
-        <span style={{display: "block", marginRight: "100%"}}>ROBODEXO</span>
+      <div className="summonerNameNavBody">
+        <span className="text">Robodexo</span>
         <span style={{display: "block"}}>OLP</span>
       </div>
 

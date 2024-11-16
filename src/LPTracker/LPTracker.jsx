@@ -1,5 +1,7 @@
-import { Footer, LPTBody, NavBar, NavBody } from "./components"
+
 import '../../styles.css'
+import { NavBar, NavBody, LPTBody, Footer } from './components'
+
 
 export const LPTracker = () => {
 
@@ -11,7 +13,6 @@ export const LPTracker = () => {
       <div className="container bodyContainer">
       <NavBody/>
       <LPTBody/>
-      <div></div>
       </div>
 
       <Footer/>

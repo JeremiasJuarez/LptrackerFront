@@ -37,6 +37,13 @@ body{
     -webkit-text-fill-color: transparent;
 }
 
+.inputsContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
 .inputSummonerName{
     border: none;
     border-radius: 0.4rem;
@@ -112,6 +119,12 @@ body{
     background-color: rgb(32, 31, 31);
     color: white;
     font-weight: 500;
+    word-break: break-all;
+}
+
+.summonerNameNavBody{
+    margin-left: 1rem;
+    width: 100%;
 }
 
 .sumIcon{
@@ -147,55 +160,70 @@ body{
 /*contiene boton de cuenta y tack de pl*/
 .sideBarLeft{
     border-radius: 1rem;
-    /* background-color: green; */
     height: 100%;
+    padding-bottom: 1rem;
 }
 
 .buttonContainer{
     border-radius: 1rem;
     height: 20rem;
-    /* background-color: orangered; */
 }
 
 .countButton {
-    width: 18;
-    font-size: 1.5rem;
+    width: 15rem;
+    height: 10rem;
+    font-size: 2rem;
     color: #fafafa;
-    text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 10px;
     border: 2px solid #fafafa;
     background: #252525;
     box-shadow: 3px 3px #fafafa;
     cursor: pointer;
-    margin: 35px 0;
-  }
+    margin: 0 auto;
+    margin-top: 1rem;
+}
   
-  .countButton:active {
-    box-shadow: none;
+.countButton:active {
+  box-shadow: none;
     transform: translate(3px, 3px);
-  }
+}
 
 .lpBalance{
     padding-top: 1rem;
     height: 4rem;
-    /* background-color: yellow; */
-    width: 15rem;
+    width: 100%;
     margin: 0 auto;
-    border-radius: 0.5rem;
+    margin-bottom: 1rem;
     text-align: center;
     color: white;
     font-size: 2rem;
 }
 
+.refreshButton{
+    width: 15rem;
+    font-size: 1rem;
+    color: #fafafa;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #fafafa;
+    background: #252525;
+    box-shadow: 3px 3px #fafafa;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.refreshButton:active {
+    box-shadow: none;
+      transform: translate(3px, 3px);
+  }
+
 .lpCount{
     color: white;
     padding-bottom: 0.3rem;
     height: 4rem;
-    /* background-color: orange; */
     width: 15rem;
     margin: 0 auto;
-    border-radius: 0.5rem;
     text-align: center;
     font-size: 4rem;
 }
@@ -213,10 +241,26 @@ body{
     height: 100%;
 }
 
+.matchCard{
+    font-size: 1rem;
+}
+
+/*se muestra cuando todavia no se busco perfil o cuando el pefil no tiene partidas*/
+.emptySideBar{
+    background-color: rgb(32, 31, 31);
+    color: white;
+    border: 2px solid grey;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
 /*footer de toda la pagina*/
 .footerWeb{
     background-color: rgb(32, 31, 31);
-    color: white;
+    color: rgb(182, 182, 182);
+    font-size: 0.8rem;
+    font-weight: 200;
 }
 
 .win{
@@ -227,6 +271,10 @@ body{
     background-color: rgb(236, 125, 125);
 }
 
+.remake{
+    background-color: rgb(143, 141, 141);
+}
+
 @media( max-width: 360px) {
     .rankDiv{
         display: none;
@@ -235,6 +283,12 @@ body{
 
 @media( max-width: 360px) {
     .sumIcon{
+        display: none;
+    }
+}
+
+@media( max-width: 375px) {
+    .rankDiv{
         display: none;
     }
 }
@@ -269,6 +323,9 @@ body{
     .buttonContainer{
         height: auto;
     }
+    .rankDiv{
+        display: none;
+    }
 }
 
 @media( max-width: 352px){
@@ -279,3 +336,19 @@ body{
         font-size: 0.8rem;
     }
 }
+
+@media( max-width: 991px){
+    .emptySideBar{
+        width: 100%;
+    }
+    .fullLogo{
+        text-align: center;
+    }
+    .introLPT{
+        text-align: center;
+    }
+    .inputsContainer{
+        justify-content: center;
+    }
+}
+
