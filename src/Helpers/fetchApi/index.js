@@ -1,0 +1,6 @@
+export * from './getPuuid'
+export * from './getSummonerId'
+export * from './getRankProfile'
+export * from './getMatches'
+export * from './getMatch'
+export * from './filterMatch'

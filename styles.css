@@ -1,6 +1,6 @@
 body{
     background-color: rgb(32, 31, 31);
-
+    word-break: break-all;
 }
 
 *{
@@ -56,7 +56,7 @@ body{
     background-color: rgb(199, 197, 197);
 }
 
-.inputSummonerName:hover{
+.inputSummonerName:focus{
     background-color: rgb(236, 235, 235);
 }
 
@@ -71,12 +71,10 @@ body{
     background-color: rgb(199, 197, 197);
 }
 
-.inputTag:hover{
-    background-color: rgb(236, 235, 235);
-}
 .inputTag:focus{
     background-color: rgb(236, 235, 235);
 }
+
 .searchButton{
     border: none;
     outline: none;
@@ -242,8 +240,28 @@ body{
 }
 
 .matchCard{
-    font-size: 1rem;
+    margin-right: 1rem;
 }
+
+.matchContainer{
+    margin: 0 auto;
+}
+
+.cardText{
+    font-size: 1.5rem;
+    margin-bottom: -1rem;
+    margin-top: -1rem;
+}
+
+.cardText p:nth-child(2){
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+.cardText p:nth-child(3){
+    font-size: 1rem;
+
+}
+
 
 /*se muestra cuando todavia no se busco perfil o cuando el pefil no tiene partidas*/
 .emptySideBar{
@@ -275,21 +293,122 @@ body{
     background-color: rgb(143, 141, 141);
 }
 
-@media( max-width: 360px) {
+@media( max-width: 1067px){
+    .cardText p:nth-child(3){
+        font-size: 0.8rem;
+    }
+}
+
+@media( max-width: 1055px){
+    .cardText{
+    font-size: 1.3rem;
+    }
+    .cardText p:nth-child(2){
+        font-size: 1rem;
+    }
+    .cardText p:nth-child(3){
+        font-size: 1rem;
+    }
+    .cardText p:nth-child(3){
+        font-size: 0.8rem;
+    }
+}
+
+@media( max-width: 991px){
+    .emptySideBar{
+        width: 100%;
+    }
+    .fullLogo{
+        text-align: center;
+    }
+    .introLPT{
+        text-align: center;
+    }
+    .inputsContainer{
+        justify-content: center;
+    }
+    .cardText p{
+        font-size: 2rem;
+    }
+    .cardText p:nth-child(3){
+        font-size: 1.45rem;
+    }
+}
+
+@media( max-width: 490px){
+    .cardText p{
+        font-size: 1rem;
+    }
+    .cardText p:nth-child(3){
+        font-size: 1rem;
+    }
+}
+
+@media( max-width: 452px){
+    .cardText p{
+        font-size: 1rem;
+    }
+}
+
+@media( max-width: 430px){
+    .countButton{
+        border-radius: 1rem;
+        width: 100%;
+        height: 5rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .buttonContainer{
+        height: auto;
+    }
     .rankDiv{
         display: none;
     }
 }
 
-@media( max-width: 360px) {
-    .sumIcon{
-        display: none;
+@media( max-width: 411px){
+    .cardText p:nth-child(3){
+        font-size: 0.8rem;
+    }
+}
+
+@media( max-width: 377px){
+    .cardText p:nth-child(3){
+        font-size: 0.5rem;
     }
 }
 
 @media( max-width: 375px) {
     .rankDiv{
         display: none;
+    }
+    .cardText p:nth-child(2){
+        font-size: 0.8rem;
+    }
+}
+
+@media( max-width: 360px) {
+    .rankDiv{
+        display: none;
+    }
+    .sumIcon{
+        display: none;
+    }
+}
+
+@media( max-width: 352px){
+    .lpBalance{
+        font-size: 1rem;
+    }
+    .trackCount{
+        font-size: 0.8rem;
+    }
+    .cardText p{
+        font-size: 0.5rem;
+    }
+    .cardText p:nth-child(2){
+        font-size: 0.5rem;
+        margin-top: 0.5rem;
     }
 }
 
@@ -310,45 +429,16 @@ body{
         border-radius: 0.4rem;
         width: 100%;
     }
-}
-
-@media( max-width: 430px){
-    .countButton{
-        border-radius: 1rem;
-        width: 100%;
-        height: 5rem;
-        font-size: 1rem;
-        margin-bottom: 1rem;
+    .cardText p{
+        font-size: 0.5rem;
     }
-    .buttonContainer{
-        height: auto;
-    }
-    .rankDiv{
-        display: none;
+    .cardText p:nth-child(2){
+        font-size: 0.5rem;
+        margin-top: 0.5rem;
     }
 }
 
-@media( max-width: 352px){
-    .lpBalance{
-        font-size: 1rem;
-    }
-    .trackCount{
-        font-size: 0.8rem;
-    }
-}
 
-@media( max-width: 991px){
-    .emptySideBar{
-        width: 100%;
-    }
-    .fullLogo{
-        text-align: center;
-    }
-    .introLPT{
-        text-align: center;
-    }
-    .inputsContainer{
-        justify-content: center;
-    }
-}
+
+
 

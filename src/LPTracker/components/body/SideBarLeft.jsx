@@ -31,7 +31,7 @@ export const SideBarLeft = () => {
           </div>
         </div>
         <div className="row buttonContainer">
-          <button className="countButton">Track</button>
+          <button className="countButton">Track<i className="fa-solid fa-play ps-2"></i></button>
         </div>
       </div>
 

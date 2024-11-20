@@ -1,7 +1,7 @@
-
 import '../../styles.css'
 import { NavBar, NavBody, LPTBody, Footer } from './components'
 
+//*161 usecontext
 
 export const LPTracker = () => {
 

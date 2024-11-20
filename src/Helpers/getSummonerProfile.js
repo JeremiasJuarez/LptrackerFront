@@ -1,9 +1,11 @@
+import { getPuuid } from "./fetchApi"
 
 
 export const requestApi = async( summonerName, tagLine ) => {
 
     //*esta fn ejecuta todas las demas funciones y debe retornar el perfil completo del summoner
 
+    const { puuid } = await getPuuid( summonerName, tagLine )
 
 
 

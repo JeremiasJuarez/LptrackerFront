@@ -8,5 +8,5 @@ import { LPTracker } from './LPTracker'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LPTracker />
-  </StrictMode>,
+  </StrictMode>
 )
