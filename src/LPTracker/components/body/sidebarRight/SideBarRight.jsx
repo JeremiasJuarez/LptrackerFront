@@ -1,6 +1,6 @@
 
 export const SideBarRight = () => {
-
+  
 
   //*Aca iria un map() llenando los datos de las ultimas 5 partidas
   return (
@@ -11,18 +11,58 @@ export const SideBarRight = () => {
 
         <div className="row matchContainer">
 
-          <div className="card mb-1 mt-1 win matchCard col-lg-12 col-sm-12" >
-            <div className="row g-0">
-              <div className="col-3">
-                <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" className="img-fluid rounded-start p-1 imgMatch" alt="matchInfo" />
-              </div>
-              <div className="col-9 d-flex">
-                <div className="card-body cardText">
-                  <p className="card-title" style={{ marginBottom: "-0.5rem" }}>Victory</p>
-                  <p className="card-title"> 10/09/11 </p>
-                  <p className="card-title"> Ranked SoloQ </p>
-                </div>
-              </div>
+          <div className="matchCard win">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpWin">Victory <span className="matchLpWin">+50</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
+            </div>
+          </div>
+
+          <div className="matchCard remake">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpRemake">Remake <span className="matchLpRemake">+0</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
+            </div>
+          </div>
+
+          <div className="matchCard loss">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpLoss">Defeat <span className="matchLpLoss">-35</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
+            </div>
+          </div>
+
+          
+          <div className="matchCard win">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpWin">Victory <span className="matchLpWin">+50</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
+            </div>
+          </div>
+
+          <div className="matchCard win">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpWin">Victory <span className="matchLpWin">+50</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
+            </div>
+          </div>
+
+          <div className="matchCard loss">
+            <img className="img-fluid champImg" src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="" />
+            <div className="matchInfo">
+              <p className="matchLpLoss">Defeat <span className="matchLpLoss">-35</span> LP</p>
+              <p>10/10/10</p>
+              <p>Ranked SoloQ</p>
             </div>
           </div>
 

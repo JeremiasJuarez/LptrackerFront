@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react"
-import { getPuuid, getSummonerId } from "../../../Helpers/fetchApi"
-
-
+import { useContext, useState } from "react"
+import { getPuuid} from "../../../Helpers/fetchApi"
+import { LptContext } from "../../../Context/LptContext"
 
 export const NavBar = () => {
+
+  const { provideSummoner } = useContext( LptContext )
+
+  const onSummonerFound = ( summonerName, tag, puuid  ) => {
+
+    provideSummoner( summonerName, tag, puuid )
+  }
+
 
   //--estado para el manejo del form
   const [ formValues, setFormValues ] = useState({ summonerName: '', tag: '' })
@@ -44,6 +51,11 @@ export const NavBar = () => {
       const  summoner  = await getPuuid(formValues.summonerName, formValues.tag)
       
       setSummoner( summoner )
+      let gameName = summoner.summoner.gameName
+      let tagLine = summoner.summoner.tagLine
+      let puuid = summoner.summoner.puuid
+      onSummonerFound( gameName, tagLine, puuid )
+
 
     } catch (error) {
       console.log( error )
@@ -61,12 +73,12 @@ export const NavBar = () => {
       </div>
 
       <div className="col-lg-3 col-md-12 introLPT">
-        <p style={{ marginBottom: "-0.2rem", fontSize: "0.8rem", textAlign: "center" }}>Search your profile and start monitoring your league points earnings.</p>
+        <p style={{ wordBreak: "normal", marginBottom: "-0.2rem", fontSize: "0.8rem", textAlign: "center" }}>Search your profile and start monitoring your league points earnings.</p>
       </div>
 
       <div className="col-lg-6 col-md-12 inputsContainer">
         <div className="row d-inline-flex justify-content-center">
-          <form onSubmit={ onSubmit} className="col-12">
+          <form onSubmit={ onSubmit } className="col-12">
             <input 
               onChange={ onInputChange } 
               name="summonerName" 

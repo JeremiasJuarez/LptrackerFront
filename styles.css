@@ -162,30 +162,6 @@ body{
     padding-bottom: 1rem;
 }
 
-.buttonContainer{
-    border-radius: 1rem;
-    height: 20rem;
-}
-
-.countButton {
-    width: 15rem;
-    height: 10rem;
-    font-size: 2rem;
-    color: #fafafa;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: 2px solid #fafafa;
-    background: #252525;
-    box-shadow: 3px 3px #fafafa;
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 1rem;
-}
-  
-.countButton:active {
-  box-shadow: none;
-    transform: translate(3px, 3px);
-}
 
 .lpBalance{
     padding-top: 1rem;
@@ -213,8 +189,8 @@ body{
 
 .refreshButton:active {
     box-shadow: none;
-      transform: translate(3px, 3px);
-  }
+    transform: translate(3px, 3px);
+}
 
 .lpCount{
     color: white;
@@ -232,36 +208,96 @@ body{
     margin-top: 1rem;
 }
 
-/*Contiene las cars de las partidas anteriores*/
+.buttonContainer{
+    border-radius: 1rem;
+}
+
+.countButton {
+    width: 15rem;
+    height: 10rem;
+    font-size: 2rem;
+    color: #fafafa;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #fafafa;
+    background: #252525;
+    box-shadow: 3px 3px #fafafa;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+  
+.countButton:active {
+  box-shadow: none;
+    transform: translate(3px, 3px);
+}
+
+.WLCount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+/*Contiene las cards de las partidas anteriores*/
 .sideBarRight{
     border-radius: 1rem;
-    /* background-color: rgb(90, 128, 0); */
     height: 100%;
 }
 
-.matchCard{
-    margin-right: 1rem;
-}
-
-.matchContainer{
+.matchContainer {
     margin: 0 auto;
+    margin-top: -0.4rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0rem 0.5rem;
+  }
+
+.matchCard{
+    border: 2px solid white;
+    border-radius: 0.7rem;
+    color: rgb(49, 48, 48);
+    height: 6rem;
+    display: flex;
+    padding: 0.3rem;
+    font-weight: bold;
+    margin: 0.3rem;
 }
 
-.cardText{
-    font-size: 1.5rem;
-    margin-bottom: -1rem;
-    margin-top: -1rem;
+.champImg{
+    height: 5rem;
+    flex-shrink: 1;
 }
 
-.cardText p:nth-child(2){
-    font-size: 1.3rem;
-    margin-bottom: 0;
-}
-.cardText p:nth-child(3){
+.matchInfo{
     font-size: 1rem;
-
+    margin-left: 0.3rem;
 }
 
+.matchInfo p{
+    margin: 0;
+}
+
+.win{
+    background-color: rgb(102, 162, 218);
+}
+.matchLpWin{
+    color: rgb(11, 107, 2);
+}
+.loss{
+    background-color: rgb(236, 125, 125);
+}
+.matchLpLoss{
+    color: rgb(141, 13, 13);
+}
+.remake{
+    background-color: rgb(143, 141, 141);
+}
+.matchLpRemake{
+    color: #3d3d3d;
+}
 
 /*se muestra cuando todavia no se busco perfil o cuando el pefil no tiene partidas*/
 .emptySideBar{
@@ -281,35 +317,20 @@ body{
     font-weight: 200;
 }
 
-.win{
-    background-color: rgb(102, 162, 218);
+@media( width: 2040px){
+    .searchButton{
+        position: fixed;
+    }
 }
 
-.loss{
-    background-color: rgb(236, 125, 125);
-}
-
-.remake{
-    background-color: rgb(143, 141, 141);
-}
-
-@media( max-width: 1067px){
-    .cardText p:nth-child(3){
+@media( max-width: 1078px){
+    .matchInfo{
         font-size: 0.8rem;
     }
 }
 
-@media( max-width: 1055px){
-    .cardText{
-    font-size: 1.3rem;
-    }
-    .cardText p:nth-child(2){
-        font-size: 1rem;
-    }
-    .cardText p:nth-child(3){
-        font-size: 1rem;
-    }
-    .cardText p:nth-child(3){
+@media( max-width: 1024px){
+    .matchInfo{
         font-size: 0.8rem;
     }
 }
@@ -327,27 +348,6 @@ body{
     .inputsContainer{
         justify-content: center;
     }
-    .cardText p{
-        font-size: 2rem;
-    }
-    .cardText p:nth-child(3){
-        font-size: 1.45rem;
-    }
-}
-
-@media( max-width: 490px){
-    .cardText p{
-        font-size: 1rem;
-    }
-    .cardText p:nth-child(3){
-        font-size: 1rem;
-    }
-}
-
-@media( max-width: 452px){
-    .cardText p{
-        font-size: 1rem;
-    }
 }
 
 @media( max-width: 430px){
@@ -364,17 +364,17 @@ body{
     .rankDiv{
         display: none;
     }
-}
-
-@media( max-width: 411px){
-    .cardText p:nth-child(3){
-        font-size: 0.8rem;
+    .champImg{
+        height: 2.5rem;
+    }
+    .matchCard{
+        height: 4.2rem;
     }
 }
 
-@media( max-width: 377px){
-    .cardText p:nth-child(3){
-        font-size: 0.5rem;
+@media( max-width: 410px ){
+    .WLCount{
+        font-size: 1rem;
     }
 }
 
@@ -382,7 +382,7 @@ body{
     .rankDiv{
         display: none;
     }
-    .cardText p:nth-child(2){
+    .WLCount{
         font-size: 0.8rem;
     }
 }
@@ -403,12 +403,11 @@ body{
     .trackCount{
         font-size: 0.8rem;
     }
-    .cardText p{
-        font-size: 0.5rem;
-    }
-    .cardText p:nth-child(2){
-        font-size: 0.5rem;
-        margin-top: 0.5rem;
+}
+
+@media( max-width: 352px){
+    .matchInfo{
+        font-size: 0.6rem;
     }
 }
 
@@ -429,16 +428,16 @@ body{
         border-radius: 0.4rem;
         width: 100%;
     }
-    .cardText p{
-        font-size: 0.5rem;
+    .matchInfo{
+        font-size: 0.6rem;
     }
-    .cardText p:nth-child(2){
-        font-size: 0.5rem;
-        margin-top: 0.5rem;
+    .matchCard{
+        height: 3.8rem;
     }
 }
 
-
-
-
-
+@media (min-width: 740px) and (max-width: 991px) {
+  .matchContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

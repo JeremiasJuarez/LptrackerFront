@@ -33,7 +33,7 @@ export const filterMatch = async( matchId = "", puuid = "" ) => {
       queueType = "Normal Game";
     }              
 
-    const gameInfo = { kills, deaths, assists, isRemake, result, champ, gameMode, queueType }
+    const matchInfo = { kills, deaths, assists, isRemake, result, champ, gameMode, queueType }
     
-    return gameInfo
+    return matchInfo
 }
