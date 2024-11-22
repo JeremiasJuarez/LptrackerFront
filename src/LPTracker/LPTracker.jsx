@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import '../../styles.css'
-import { NavBar, NavBody, LPTBody, Footer } from './components'
+import { NavBar, NavBody, LPTBody, Footer, EmptyLPTBody } from './components'
 import { LptContext } from '../Context/LptContext'
 
 //*161 usecontext
@@ -24,8 +24,10 @@ export const LPTracker = () => {
       <NavBar/>
 
       <div className="container bodyContainer">
-      <NavBody/>
-      <LPTBody/>
+
+      <EmptyLPTBody/>
+      {/* <NavBody/>
+      <LPTBody/> */}
       </div>
 
       <Footer/>

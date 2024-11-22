@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { getPuuid} from "../../../Helpers/fetchApi"
+import { getPuuid } from "../../../Helpers/fetchApi"
 import { LptContext } from "../../../Context/LptContext"
 
 export const NavBar = () => {
@@ -48,12 +48,12 @@ export const NavBar = () => {
     }
 
     try {
-      const  summoner  = await getPuuid(formValues.summonerName, formValues.tag)
+      const  { summoner }  = await getPuuid(formValues.summonerName, formValues.tag)
       
       setSummoner( summoner )
-      let gameName = summoner.summoner.gameName
-      let tagLine = summoner.summoner.tagLine
-      let puuid = summoner.summoner.puuid
+      let gameName = summoner.gameName
+      let tagLine = summoner.tagLine
+      let puuid = summoner.puuid
       onSummonerFound( gameName, tagLine, puuid )
 
 
@@ -63,7 +63,7 @@ export const NavBar = () => {
     }
 
   }
-  
+
 
   return (
     <div className="row p-2 navWeb flex-row ">

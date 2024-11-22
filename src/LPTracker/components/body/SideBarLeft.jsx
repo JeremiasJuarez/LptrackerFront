@@ -15,19 +15,19 @@ export const SideBarLeft = () => {
         </div>
 
         <div className="row lpCountContianer">
-          <span className="lpCount">10</span>
+          <span className="lpCount lpCountWin"> +2928 </span>
         </div>
 
         <div className="row trackCount">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <span>Start</span>
             <br />
-            <span>Emerald I { 80 } LP</span>
+            <span>Diamond III { 0 } LP</span>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <span>Current</span>
             <br />
-            <span>Diamond IV { 10 } LP</span>
+            <span>Challenger { 2128 } LP</span>
           </div>
         </div>
 
@@ -36,7 +36,7 @@ export const SideBarLeft = () => {
         </div>
 
         <div className="col-12 WLCount">
-            <span> Wins: 2 | Losses: 1 </span>
+            <span> Wins: 99 | Losses: 0 </span>
         </div>
 
 

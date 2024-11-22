@@ -3,8 +3,13 @@ body{
     word-break: break-all;
 }
 
+
 *{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+input:invalid {
+    text-decoration: none;
 }
 
 /*contiene toda la app*/
@@ -128,6 +133,7 @@ body{
 .sumIcon{
     height: auto;
     width: 6rem;
+    border-radius: 0.3rem;
 }
 
 
@@ -202,6 +208,24 @@ body{
     font-size: 4rem;
 }
 
+.lpCountWin{
+    color: rgb(51, 179, 19);
+    font-family: 'Roboto','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.lpCountLoss{
+    color: rgb(184, 13, 13);
+    font-family: 'Roboto','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.lpCountEven{
+    color: rgb(120, 122, 119);
+    font-family: 'Roboto','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+}
+
 .trackCount{
     color: white;
     text-align: center;
@@ -239,6 +263,105 @@ body{
     color: white;
     margin-top: 1rem;
     font-size: 1.5rem;
+}
+
+.emptyBody{
+    word-break: normal;
+    color: white;
+    background-color: rgb(32, 31, 31);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.emptyLeft{
+    width: 20rem;
+    height: 18rem;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 0.5rem;
+    border: 2px solid #fafafa;
+    background: #252525;
+    box-shadow: 2px 2px #fafafa;
+}
+
+.emptyLeft div{
+    margin: 0.5rem;
+    padding-bottom: 3px;
+}
+
+.emptyRight{
+    overflow: hidden;
+    width: auto;
+    height: 18rem;
+    border-radius: 0.5rem;
+    border: 2px solid #fafafa;
+    background: #252525;
+    box-shadow: 2px 2px #fafafa;
+}
+
+@keyframes randomMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-150px, 0px);
+    }
+    /* 50% {
+        transform: translate(-75px, -100px);
+    } */
+    75% {
+        transform: translate(-100px, -310px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.emptyRight img{
+    animation-name: randomMove;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    position: relative;
+}
+
+.famousProfiles{
+    word-break: normal;
+    margin-top: 1rem;
+    color: white;
+}
+
+.profiles{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.profiles div{
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transition:  background-color 0.5s, border-color 0.5s, border-width 0.5s;
+    border: 0px solid;
+}
+
+.profiles div:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    background-color: rgb(70, 69, 69);
+}
+
+.profiles div:active{
+    background-color: rgb(107, 104, 104);
+}
+
+.profiles div img {
+    border-radius: 5rem;
+    width: 4rem;
+    height: 4rem;
 }
 
 /*Contiene las cards de las partidas anteriores*/
@@ -315,6 +438,8 @@ body{
     color: rgb(182, 182, 182);
     font-size: 0.8rem;
     font-weight: 200;
+    word-break: normal;
+    margin-top: 5rem;
 }
 
 @media( width: 2040px){
@@ -350,6 +475,29 @@ body{
     }
 }
 
+@media( max-width: 815px){
+    .emptyBody{
+        flex-direction: column;
+    }
+    .emptyLeft{
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+    }
+}
+
+@media( max-width: 620px){
+    .profiles{
+        flex-wrap: wrap;
+    }
+}
+
+@media( max-width: 450px){
+    .emptyRight{
+        display: none;
+    }
+}
+
 @media( max-width: 430px){
     .countButton{
         border-radius: 1rem;
@@ -375,6 +523,14 @@ body{
 @media( max-width: 410px ){
     .WLCount{
         font-size: 1rem;
+    }
+}
+
+@media( max-width: 390px){
+    .lpCountWin, .lpCountLoss, .lpCountEven{
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: -1.5rem;
     }
 }
 

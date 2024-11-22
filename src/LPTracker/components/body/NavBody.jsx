@@ -16,8 +16,8 @@ export const NavBody = () => {
       </div>
 
       <div className="rankDiv me-3" style={{width: "100%"}}>
-        <img className="rankIcon" src="src/imgs/Rank=None.png" alt="rankIcon"/>
-        <span style={{fontSize:"0.9rem", marginTop:"-0.5rem"}}>Diamond IV</span>
+        <img className="rankIcon" src="src/imgs/Rank=Challenger.png" alt="rankIcon"/>
+        <span style={{fontSize:"0.9rem", marginTop:"-0.5rem", marginRight: '0.3rem'}}>Challenger</span>
       </div>
 
     </div>

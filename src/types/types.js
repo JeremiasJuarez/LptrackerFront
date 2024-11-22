@@ -1,4 +1,5 @@
 export const types = {
     search: '[Search] search summoner',
-    update: '[Update] update data'
+    set: '[Set] set summoner',
+    update: '[Update] update summoner'
 }
