@@ -7,8 +7,8 @@ import { LPTracker } from './LPTracker'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <LptProvider>
-      <LPTracker />
-    </LptProvider>
+      <LptProvider>
+        <LPTracker />
+      </LptProvider>
   </StrictMode>
 )

@@ -9,7 +9,7 @@ export const setSummonerReducer = ( state = {} , action ) => {
                 summoner: action.payload
             };
             
-        case types.update:
+        case types.render:
             return {
                 ...state,
                 logged: false,

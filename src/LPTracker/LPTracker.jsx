@@ -1,22 +1,40 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../../styles.css'
 import { NavBar, NavBody, LPTBody, Footer, EmptyLPTBody } from './components'
 import { LptContext } from '../Context/LptContext'
-
+import { LoadingBody } from './components/body/LoadingBody'
+//?LoadingBody
 //*161 usecontext
 
 
 export const LPTracker = () => {
 
-  // const { login, user } = useContext( LptContext )
+  const { summoner } = useContext( LptContext )
 
-  // const onLogin = () => {
-  //   login('Robodexo')
-  // }
+  const [showComponent, setShowComponent] = useState(null);
 
+  useEffect(() => {
+    if (!summoner.summonerName) {
 
+      setShowComponent('Home');
+    }
+  }, [summoner.summonerName]);
 
+  useEffect(() => {
+    if( summoner.summonerName )
+      
+      setShowComponent('Loading')
 
+  }, [summoner.summonerName])
+
+  useEffect(() => {
+    if( showComponent === 'Loading' )
+
+      setTimeout(() => {
+        setShowComponent('Body')
+      }, 1000);
+      
+  }, [showComponent])
 
   return (
     <div className="container-fluid LPTRacker">
@@ -25,9 +43,13 @@ export const LPTracker = () => {
 
       <div className="container bodyContainer">
 
-      <EmptyLPTBody/>
-      {/* <NavBody/>
-      <LPTBody/> */}
+      {   
+        showComponent === 'Home' ? <EmptyLPTBody/> 
+        : showComponent === 'Loading' ? <LoadingBody/> 
+        : showComponent === 'Body' ? (<><NavBody/><LPTBody/></>) 
+        : <LoadingBody/>
+      }
+      
       </div>
 
       <Footer/>
@@ -36,3 +58,7 @@ export const LPTracker = () => {
 
   )
 }
+
+//* mostrar este componente en ruta /robodexo#olp
+//* cambiar eventualmente el settimeout por una funcion que este pendiente de los valores en el context
+//* se debera mostrar el loading hasta que esten todos los valores

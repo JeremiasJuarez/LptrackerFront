@@ -1,24 +1,31 @@
 import { useContext, useState } from "react"
 import { getPuuid } from "../../../Helpers/fetchApi"
 import { LptContext } from "../../../Context/LptContext"
+import { SummonerNotFound } from "./SummonerNotFound"
+import { getSummonerFullProfile } from "../../../Helpers/getSummonerFullProfile"
 
 export const NavBar = () => {
 
   const { provideSummoner } = useContext( LptContext )
 
+  //--Grabar en el context
   const onSummonerFound = ( summonerName, tag, puuid  ) => {
-
     provideSummoner( summonerName, tag, puuid )
   }
 
+  //--Estado para impedir doble posteo de formulario mientras se hace la peticion
+  const [isSubmitting, setIsSubmitting] = useState( false )
 
-  //--estado para el manejo del form
+  //--Estado para manejo de error
+  const [{found, sn, st}, setSumNotFound] = useState({ found: true, sn: '', st: ''})
+
+  //--Estado para el manejo del form
   const [ formValues, setFormValues ] = useState({ summonerName: '', tag: '' })
 
   //--Estado para el summoner encontrado 
   const [ summoner, setSummoner ] = useState({})
 
-  //--tomamos valor dinamico de los input con propiedad computada de los obj js
+  //--Tomamos valor dinamico de los input con propiedad computada de los obj js
   const onInputChange = ( { target } ) => {
     const { name, value } = target
     setFormValues({
@@ -27,41 +34,54 @@ export const NavBar = () => {
     })
   }
   
-  //--al hacer submit efectuamos validaciones del formulario si esta todo correcto se llama a getpuuid 
+  //--Al hacer submit efectuamos validaciones del formulario si esta todo correcto se llama a getpuuid 
   const onSubmit = async(e) => {
     e.preventDefault()
 
-    if( formValues.tag.length > 5  ){
-      throw new Error('The maximum number of characters for tag is 5')
-    }
+    if (isSubmitting) return;
 
-    if( formValues.tag.length < 3   ){
-      throw new Error('The minimum number of characters for tag is 3')
-    }
+    setIsSubmitting(true); // Indica que el formulario está en proceso de envío
 
-    if( formValues.summonerName.length < 3 ){
-      throw new Error('Summoner Name should be at least 3 characters long')
+    if (formValues.tag.length > 5 || formValues.tag.length < 3) {
+      setIsSubmitting(false)
+      throw new Error('Tag length must be between 3 and 5 characters.');
     }
-
-    if( formValues.summonerName.length > 16  ){
-      throw new Error('The maximum number of characters for Summoner Name is 16')
+    if (formValues.summonerName.length < 3 || formValues.summonerName.length > 16) {
+      setIsSubmitting(false)
+      throw new Error('Summoner Name length must be between 3 and 16 characters.');
     }
 
     try {
-      const  { summoner }  = await getPuuid(formValues.summonerName, formValues.tag)
       
-      setSummoner( summoner )
-      let gameName = summoner.gameName
-      let tagLine = summoner.tagLine
-      let puuid = summoner.puuid
-      onSummonerFound( gameName, tagLine, puuid )
+      const  res  = await getPuuid(formValues.summonerName, formValues.tag)
+      
+      if( res.summoner?.gameName ){
 
+        setSummoner( res.summoner )
+        const { gameName, tagLine, puuid } = res.summoner
+        onSummonerFound( gameName, tagLine, puuid )
+        setSumNotFound({ found:true, sn:'', st:'' } )
+        getSummonerFullProfile( puuid, '...')
+        
+      } else{
+        const err = JSON.stringify(res)
+        throw new Error( err )
+      }
+
+      //--Limpiamos valores del form, dando 1 seg de delay para la pantalla de load
+      setSumNotFound({ found: true, sn: formValues.summonerName, st: formValues.tag})
+
+      setTimeout(() => {
+      setFormValues({ summonerName: '', tag: '' })
+      }, 1000);
 
     } catch (error) {
-      console.log( error )
-      return error
+      setFormValues({ summonerName: '', tag: '' })
+      setSumNotFound({ found: false, sn: formValues.summonerName, st: formValues.tag })
+      return { error, sn, st }
+    } finally {
+      setIsSubmitting(false)
     }
-
   }
 
 
@@ -84,21 +104,30 @@ export const NavBar = () => {
               name="summonerName" 
               className="inputSummonerName" 
               type="text" 
+              value={formValues.summonerName}
               placeholder="Summoner Name" />
             <input 
               onChange={ onInputChange } 
               name="tag" 
               className="inputTag" 
               type="text" 
+              value={formValues.tag}
               placeholder="Tag" />
             <button 
               type="submit" 
-              className="searchButton">
+              className="searchButton"
+              disabled={ isSubmitting }
+            >
                 <i className="fa-solid fa-magnifying-glass" blank="SearchLogo"></i>
             </button>
           </form>
         </div>
       </div>
+
+    {
+      found ? null : <SummonerNotFound sn={sn} st={st} />
+    }
+
     </div>
   )
 }

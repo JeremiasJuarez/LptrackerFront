@@ -1,6 +1,21 @@
+import { useContext, useEffect } from "react"
+import { LptContext } from "../../../Context/LptContext"
+import { getSummonerFullProfile } from "../../../Helpers/getSummonerFullProfile"
 
 
 export const SideBarLeft = () => {
+
+  const { summoner } = useContext(LptContext)
+
+  // useEffect(() => {
+
+  //   const puuid = summoner.puuid
+  //   getSummonerFullProfile( puuid )
+
+  // }, [summoner.summonerName])
+  
+
+
   return (
     <section className="col-lg-8 col-md-12 sideBarLeft"> 
     

@@ -7,10 +7,22 @@ export const getRankProfile = async( summonerId = "" ) => {
 
     const url = `https://lollpt-production.up.railway.app/api/rankprofile?summonerId=${ summonerId }`
 
-    const res = await fetch(url)
-    const data = await res.json()
-    console.log( data )
-    return data;
+    try {
+        
+        const res = await fetch(url)
+        const data = await res.json()
+        console.log( data )
+
+        
+        return data;
+
+    } catch (error) {
+        return error
+    }
+
+
+
+
 
 }
 
