@@ -2,7 +2,7 @@
 //--Retornamos informacion filtrada que necesitamos para la app
 //--{ champ, kda, win/loss }
 
-import { getMatch } from "./getMatch"
+import { getMatch } from "../fetchApi/getMatch"
 
 export const filterMatch = async( matchId = "", puuid = "" ) => {
 
@@ -11,7 +11,6 @@ export const filterMatch = async( matchId = "", puuid = "" ) => {
     const summonerIndex = match.metadata.participants.indexOf( puuid )
 
     const summonerInfo = match.info.participants[ summonerIndex ]
-
     const champ = summonerInfo.championName
     const gameMode = match.info.gameMode
     const kills = summonerInfo.kills

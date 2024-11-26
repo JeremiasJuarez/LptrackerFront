@@ -1,20 +1,36 @@
-import { getRankProfile, getSummonerId } from "./fetchApi"
+import { getMatches, getRankProfile, getSummonerId } from "./fetchApi"
+import { filterMatch, filterQueueType } from "./filters"
 
 
-export const getSummonerFullProfile = async( puuid, a ) => {
+
+export const getSummonerFullProfile = async( puuid ) => {
 
     //*esta fn ejecuta todas las demas funciones y debe retornar el perfil completo del summoner
-    // const { summonerLong } = await getSummonerId( puuid )
-    // const { id, accountId, profileIconId } = summonerLong
     
-    // const res = await getRankProfile( id )
+    try {
+        const { summonerLong } = await getSummonerId( puuid )
+        const { id, profileIconId } = summonerLong
 
-    // if( res.riotError === "Summoner has not played any ranked games recently" ){
-    //     return res.riotError
-    // }else{
-    //     console.log( res )
-    // }
+        const { rankProfile } = await getRankProfile( id )
+        
+        const rankedQueues = filterQueueType(rankProfile)
 
-    console.log( {puuid, a} )
+        const { matches } = await getMatches( puuid ) 
+        const arrFilterMatchs = await Promise.all( matches.map( async( match ) =>{
+            return filterMatch( match, puuid )
+        }))
+
+        const summonerFullProfile = {
+            id,
+            profileIconId,
+            arrFilterMatchs,
+            rankedQueues
+        }
+
+        return summonerFullProfile
+        
+    } catch (error) {
+        console.log( error )
+    }
 
 }

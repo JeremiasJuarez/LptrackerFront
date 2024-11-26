@@ -61,7 +61,7 @@ export const NavBar = () => {
         const { gameName, tagLine, puuid } = res.summoner
         onSummonerFound( gameName, tagLine, puuid )
         setSumNotFound({ found:true, sn:'', st:'' } )
-        getSummonerFullProfile( puuid, '...')
+        getSummonerFullProfile( puuid )
         
       } else{
         const err = JSON.stringify(res)
