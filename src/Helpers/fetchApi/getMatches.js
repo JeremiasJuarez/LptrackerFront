@@ -6,8 +6,21 @@ export const getMatches = async( puuid = "" ) => {
 
     const url = `https://lollpt-production.up.railway.app/api/matches?puuid=${ puuid }&count=6`
 
-    const res = await fetch(url)
-    const data = await res.json()
-    return data;
+    // const res = await fetch(url)
+    // const data = await res.json()
+    // return data;
+
+    try {
+        const res = await fetch(url)
+
+        if (!res.ok) {
+            throw new Error('Failed to fetch data');
+          }
+
+        const data = await res.json()
+        return data;
+    } catch (error) {
+        throw error
+    }
 
 }

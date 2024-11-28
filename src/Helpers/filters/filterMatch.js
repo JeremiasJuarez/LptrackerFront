@@ -33,6 +33,5 @@ export const filterMatch = async( matchId = "", puuid = "" ) => {
     }              
 
     const matchInfo = { kills, deaths, assists, isRemake, result, champ, gameMode, queueType }
-    
     return matchInfo
 }

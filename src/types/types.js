@@ -1,5 +1,5 @@
 export const types = {
     search: '[Search] search summoner',
-    render: '[Render] render summoner',
+    setFullSummoner: '[setFullSummoner] setFullSummoner',
     update: '[Update] update summoner'
 }

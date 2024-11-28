@@ -3,7 +3,8 @@
 export const filterQueueType = ( rankProfile ) => {
 
     if ( rankProfile.length === 0 ){
-        return 'unranked'
+        const queueType = 'unranked'
+        return { queueType, tier: "unranked" }
     }
     if ( rankProfile.length === 1){
         const queueType = rankProfile[0].queueType

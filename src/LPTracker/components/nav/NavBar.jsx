@@ -2,7 +2,12 @@ import { useContext, useState } from "react"
 import { getPuuid } from "../../../Helpers/fetchApi"
 import { LptContext } from "../../../Context/LptContext"
 import { SummonerNotFound } from "./SummonerNotFound"
-import { getSummonerFullProfile } from "../../../Helpers/getSummonerFullProfile"
+
+const initialErrorState = {
+  hasError: false,
+  summonerName: '',
+  tag: '',
+};
 
 export const NavBar = () => {
 
@@ -13,17 +18,14 @@ export const NavBar = () => {
     provideSummoner( summonerName, tag, puuid )
   }
 
-  //--Estado para impedir doble posteo de formulario mientras se hace la peticion
-  const [isSubmitting, setIsSubmitting] = useState( false )
+  //--Estado para valores del form
+  const [formValues, setFormValues] = useState({ summonerName: '', tag: ''})
 
-  //--Estado para manejo de error
-  const [{found, sn, st}, setSumNotFound] = useState({ found: true, sn: '', st: ''})
+  //--Estado para evitar doble posteo
+  const [submiting, setSubmiting] = useState(false)
 
-  //--Estado para el manejo del form
-  const [ formValues, setFormValues ] = useState({ summonerName: '', tag: '' })
-
-  //--Estado para el summoner encontrado 
-  const [ summoner, setSummoner ] = useState({})
+  //--Estado para renderizar mensaje de error
+  const [errorCatched, setErrorCatched] = useState(initialErrorState)
 
   //--Tomamos valor dinamico de los input con propiedad computada de los obj js
   const onInputChange = ( { target } ) => {
@@ -37,51 +39,27 @@ export const NavBar = () => {
   //--Al hacer submit efectuamos validaciones del formulario si esta todo correcto se llama a getpuuid 
   const onSubmit = async(e) => {
     e.preventDefault()
-
-    if (isSubmitting) return;
-
-    setIsSubmitting(true); // Indica que el formulario está en proceso de envío
-
-    if (formValues.tag.length > 5 || formValues.tag.length < 3) {
-      setIsSubmitting(false)
-      throw new Error('Tag length must be between 3 and 5 characters.');
-    }
-    if (formValues.summonerName.length < 3 || formValues.summonerName.length > 16) {
-      setIsSubmitting(false)
-      throw new Error('Summoner Name length must be between 3 and 16 characters.');
-    }
+    if (submiting) return;
+    setSubmiting(true);
 
     try {
-      
-      const  res  = await getPuuid(formValues.summonerName, formValues.tag)
-      
-      if( res.summoner?.gameName ){
-
-        setSummoner( res.summoner )
-        const { gameName, tagLine, puuid } = res.summoner
-        onSummonerFound( gameName, tagLine, puuid )
-        setSumNotFound({ found:true, sn:'', st:'' } )
-        getSummonerFullProfile( puuid )
-        
-      } else{
-        const err = JSON.stringify(res)
-        throw new Error( err )
+      if (formValues.tag.length > 5 || formValues.tag.length < 3) {
+        throw new Error('Tag length must be between 3 and 5 characters.');
       }
-
-      //--Limpiamos valores del form, dando 1 seg de delay para la pantalla de load
-      setSumNotFound({ found: true, sn: formValues.summonerName, st: formValues.tag})
-
-      setTimeout(() => {
-      setFormValues({ summonerName: '', tag: '' })
-      }, 1000);
-
+      if (formValues.summonerName.length < 3 || formValues.summonerName.length > 16) {
+        throw new Error('Summoner Name length must be between 3 and 16 characters.');
+      }
+      const { summoner } = await getPuuid(formValues.summonerName,formValues.tag)
+      onSummonerFound( summoner.gameName, summoner.tagLine, summoner.puuid )
+      setFormValues({ summonerName: '', tag: '' });
+      setErrorCatched(false);
     } catch (error) {
-      setFormValues({ summonerName: '', tag: '' })
-      setSumNotFound({ found: false, sn: formValues.summonerName, st: formValues.tag })
-      return { error, sn, st }
+      setErrorCatched( {hasError: true, summonerName: formValues.summonerName, tag: formValues.tag} )
+      setFormValues({ summonerName: '', tag: ''})
     } finally {
-      setIsSubmitting(false)
+      setSubmiting(false);
     }
+
   }
 
 
@@ -98,35 +76,33 @@ export const NavBar = () => {
 
       <div className="col-lg-6 col-md-12 inputsContainer">
         <div className="row d-inline-flex justify-content-center">
-          <form onSubmit={ onSubmit } className="col-12">
+          <form onSubmit={ onSubmit } className="col-12 d-flex align-items-center formNav">
             <input 
               onChange={ onInputChange } 
-              name="summonerName" 
+              name="summonerName"
+              value={ formValues.summonerName} 
               className="inputSummonerName" 
               type="text" 
-              value={formValues.summonerName}
               placeholder="Summoner Name" />
             <input 
               onChange={ onInputChange } 
               name="tag" 
+              value={ formValues.tag} 
               className="inputTag" 
-              type="text" 
-              value={formValues.tag}
+              type="text"
               placeholder="Tag" />
             <button 
               type="submit" 
               className="searchButton"
-              disabled={ isSubmitting }
+              disabled={ submiting }
             >
-                <i className="fa-solid fa-magnifying-glass" blank="SearchLogo"></i>
+              <i className="fa-solid fa-magnifying-glass" blank="SearchLogo"></i>
             </button>
           </form>
         </div>
       </div>
 
-    {
-      found ? null : <SummonerNotFound sn={sn} st={st} />
-    }
+      {errorCatched.hasError && <SummonerNotFound summonerName={errorCatched.summonerName} tag={errorCatched.tag} />}
 
     </div>
   )

@@ -1,7 +1,7 @@
 
-export const SummonerNotFound = ( {sn, st } ) => {
+export const SummonerNotFound = ( {summonerName, tag}  ) => {
 
   return(
-    <div className="notFoundComponent"><p><i className="fa-solid fa-circle-exclamation"></i> {`Summoner ${sn}#${st} not found`}</p></div>
+    <div className="notFoundComponent"><p><i className="fa-solid fa-circle-exclamation"></i> {`Summoner ${summonerName}#${tag} not found`}</p></div>
   )
 }

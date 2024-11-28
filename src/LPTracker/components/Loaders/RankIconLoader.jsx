@@ -1,9 +1,9 @@
-import React from 'react'
-import '../../../../loaderStyles.css'
+import './LoadingRankIconStyles.css'
 
-export const LoadingBody = () => {
+
+export const RankIconLoader = () => {
     return (
-        <div className='loadingBody'>
+        <div className='rankIconLoader'>
             <div className="loader">
                 <div className="bar1"></div>
                 <div className="bar2"></div>

@@ -8,13 +8,18 @@ export const setSummonerReducer = ( state = {} , action ) => {
                 ...state,
                 summoner: action.payload
             };
-            
-        case types.render:
+        
+        case types.setFullSummoner:
             return {
                 ...state,
-                logged: false,
-                name: 'no user'
-            };
+                fullProfile: action.payload
+            };    
+        // case types.render:
+        //     return {
+        //         ...state,
+        //         logged: false,
+        //         name: 'no user'
+        //     };
 
 
         default:

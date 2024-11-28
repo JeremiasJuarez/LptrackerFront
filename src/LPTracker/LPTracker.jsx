@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import '../../styles.css'
 import { NavBar, NavBody, LPTBody, Footer, EmptyLPTBody } from './components'
 import { LptContext } from '../Context/LptContext'
-import { LoadingBody } from './components/body/LoadingBody'
+import { LoadingBody } from './components/Loaders'
+
 //?LoadingBody
 //*161 usecontext
 
@@ -13,28 +14,48 @@ export const LPTracker = () => {
 
   const [showComponent, setShowComponent] = useState(null);
 
+  // useEffect(() => {
+  //   if (!summoner.summonerName) {
+
+  //     setShowComponent('Home');
+  //   }
+  // }, [summoner.summonerName]);
+
+  // useEffect(() => {
+  //   if( summoner.summonerName )
+      
+  //     setShowComponent('Loading')
+
+  // }, [summoner.summonerName])
+
+  // useEffect(() => {
+  //   if( showComponent === 'Loading' )
+
+  //     setTimeout(() => {
+  //       setShowComponent('Body')
+  //     }, 1000);
+      
+  // }, [showComponent])
+
   useEffect(() => {
+    // Si no hay nombre de invocador, se muestra 'Home'
     if (!summoner.summonerName) {
-
       setShowComponent('Home');
+      return;
     }
+
+    // Si hay nombre de invocador, se muestra 'Loading'
+    setShowComponent('Loading');
+
+    // Después de 1 segundo, cambia a 'Body'
+    const timer = setTimeout(() => {
+      setShowComponent('Body');
+    }, 1000);
+
+    // Limpia el timeout
+    return () => clearTimeout(timer);
+
   }, [summoner.summonerName]);
-
-  useEffect(() => {
-    if( summoner.summonerName )
-      
-      setShowComponent('Loading')
-
-  }, [summoner.summonerName])
-
-  useEffect(() => {
-    if( showComponent === 'Loading' )
-
-      setTimeout(() => {
-        setShowComponent('Body')
-      }, 1000);
-      
-  }, [showComponent])
 
   return (
     <div className="container-fluid LPTRacker">
