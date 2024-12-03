@@ -13,7 +13,13 @@ export const setSummonerReducer = ( state = {} , action ) => {
             return {
                 ...state,
                 fullProfile: action.payload
-            };    
+            };
+        
+        case types.setServer:
+            return {
+                ...state,
+                server: action.payload
+            };
         // case types.render:
         //     return {
         //         ...state,

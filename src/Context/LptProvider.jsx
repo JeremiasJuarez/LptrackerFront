@@ -5,15 +5,14 @@ import { types } from '../types/types'
 
 const initialState = {
   summoner: {},
-  fullProfile: {}
+  fullProfile: {},
+  server: ''
 }
 
 
 export const LptProvider = ({ children }) => {
 
   const [ summonerState, dispatch ] = useReducer( setSummonerReducer, initialState )
-
-  const memorizedSummoner = useMemo(() => summonerState.summoner, [summonerState.summoner]);
 
   const setFullSummoner = ( fullSummoner ) => {
 
@@ -22,6 +21,17 @@ export const LptProvider = ({ children }) => {
       payload: {
         ...fullSummoner
       }
+    }
+
+    dispatch( action )
+
+  }
+
+  const setServer = ( server ) => {
+
+    const action = {
+      type: types.setServer,
+      payload: server
     }
 
     dispatch( action )
@@ -50,7 +60,8 @@ export const LptProvider = ({ children }) => {
     <LptContext.Provider value={{ 
       ...summonerState,
       provideSummoner: provideSummoner,
-      setFullSummoner: setFullSummoner
+      setFullSummoner: setFullSummoner,
+      setServer: setServer
       // login: login
      }}>
         { children }

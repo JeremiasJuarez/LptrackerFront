@@ -115,6 +115,38 @@ input:invalid {
     color: rgb(204, 43, 43);
 }
 
+.serverMenu{
+    border-radius: 0.2rem;
+    font-size: 0.7rem;
+    width: 4.2rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: #1f1e1e;
+}
+
+.serverMenuOptions{
+    border-radius: 0.2rem;
+    border: 1px solid rgb(212, 203, 203);
+    background-color: #252525;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.serverItem:first-child {
+    border-top: none;
+}
+.serverItem{
+    color: white;
+    border-top: 1px solid grey;
+}
+.serverItem:hover{
+    background-color: grey;
+    border-top: 1px solid grey;
+}
+
+.serverImg{
+    height: 2rem;
+}
 /* Esta dentro de LPTRacker. Contiene navbody, sidebarleft y sidebarright */
 .bodyContainer{
     width: 75%;
@@ -409,6 +441,10 @@ input:invalid {
     flex-shrink: 1;
 }
 
+.champImg[alt]{
+    font-size: 0.8rem;
+}
+
 .matchInfo{
     font-size: 1rem;
     margin-left: 0.3rem;
@@ -418,19 +454,19 @@ input:invalid {
     margin: 0;
 }
 
-.win{
+.Win{
     background-color: rgb(102, 162, 218);
 }
 .matchLpWin{
     color: rgb(11, 107, 2);
 }
-.loss{
+.Loss{
     background-color: rgb(236, 125, 125);
 }
 .matchLpLoss{
     color: rgb(141, 13, 13);
 }
-.remake{
+.Remake{
     background-color: rgb(143, 141, 141);
 }
 .matchLpRemake{
@@ -607,6 +643,9 @@ input:invalid {
     }
     .matchCard{
         height: 3.8rem;
+    }
+    .champImg[alt]{
+        font-size: 0.4rem;
     }
 }
 

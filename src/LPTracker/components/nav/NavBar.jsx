@@ -2,21 +2,19 @@ import { useContext, useState } from "react"
 import { getPuuid } from "../../../Helpers/fetchApi"
 import { LptContext } from "../../../Context/LptContext"
 import { SummonerNotFound } from "./SummonerNotFound"
+import { DropDownServer } from "./DropDownServer";
+import { getSummonerFullProfile } from "../../../Helpers/getSummonerFullProfile";
 
 const initialErrorState = {
   hasError: false,
   summonerName: '',
   tag: '',
+  error: ''
 };
 
 export const NavBar = () => {
 
-  const { provideSummoner } = useContext( LptContext )
-
-  //--Grabar en el context
-  const onSummonerFound = ( summonerName, tag, puuid  ) => {
-    provideSummoner( summonerName, tag, puuid )
-  }
+  const { provideSummoner, setFullSummoner, server } = useContext( LptContext )
 
   //--Estado para valores del form
   const [formValues, setFormValues] = useState({ summonerName: '', tag: ''})
@@ -50,12 +48,16 @@ export const NavBar = () => {
         throw new Error('Summoner Name length must be between 3 and 16 characters.');
       }
       const { summoner } = await getPuuid(formValues.summonerName,formValues.tag)
-      onSummonerFound( summoner.gameName, summoner.tagLine, summoner.puuid )
+      const fullProfile = await getSummonerFullProfile( summoner.puuid, server )
+
+      provideSummoner(summoner.gameName, summoner.tagLine, summoner.puuid);
+      setFullSummoner(fullProfile);
+
       setFormValues({ summonerName: '', tag: '' });
-      setErrorCatched(false);
+      setErrorCatched( initialErrorState );
     } catch (error) {
-      setErrorCatched( {hasError: true, summonerName: formValues.summonerName, tag: formValues.tag} )
-      setFormValues({ summonerName: '', tag: ''})
+      setErrorCatched( {hasError: true, summonerName: formValues.summonerName, tag: formValues.tag, error: error} )
+      setFormValues({ summonerName: '', tag: '' })
     } finally {
       setSubmiting(false);
     }
@@ -71,12 +73,13 @@ export const NavBar = () => {
       </div>
 
       <div className="col-lg-3 col-md-12 introLPT">
-        <p style={{ wordBreak: "normal", marginBottom: "-0.2rem", fontSize: "0.8rem", textAlign: "center" }}>Search your profile and start monitoring your league points earnings.</p>
+        <p style={{ wordBreak: "normal", marginBottom: "-0.2rem", fontSize: "0.8rem", textAlign: "center" }}>Search your profile and start monitoring your league points earnings. (Currently only supporting SoloQ)</p>
       </div>
 
       <div className="col-lg-6 col-md-12 inputsContainer">
         <div className="row d-inline-flex justify-content-center">
           <form onSubmit={ onSubmit } className="col-12 d-flex align-items-center formNav">
+            <DropDownServer/>
             <input 
               onChange={ onInputChange } 
               name="summonerName"
@@ -102,7 +105,7 @@ export const NavBar = () => {
         </div>
       </div>
 
-      {errorCatched.hasError && <SummonerNotFound summonerName={errorCatched.summonerName} tag={errorCatched.tag} />}
+      {errorCatched.hasError && <SummonerNotFound summonerName={errorCatched.summonerName} tag={errorCatched.tag} error={errorCatched.error.toString()}/>}
 
     </div>
   )

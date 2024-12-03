@@ -3,9 +3,9 @@
 //--{ leagueId, queueType, tier, rank, summonerId, leaguePoints, wins, losses, 
 //--veteran, inactive, freshBlood, hotStreak } 
 
-export const getRankProfile = async( summonerId = "" ) => {
+export const getRankProfile = async( summonerId = "", server = '' ) => {
 
-    const url = `https://lollpt-production.up.railway.app/api/rankprofile?summonerId=${ summonerId }`
+    const url = `https://lollpt-production.up.railway.app/api/rankprofile?summonerId=${ summonerId }&server=${ server }`
 
     try {
         
@@ -17,9 +17,6 @@ export const getRankProfile = async( summonerId = "" ) => {
     } catch (error) {
         return error
     }
-
-
-
 
 
 }

@@ -1,5 +1,7 @@
 
 export const EmptyLPTracker = () => {
+  const truck = getSummonerFullProfile('Ivvr5RrqcIG_jmcl8ZiQrRYhfux6LJfVizqXrbisJpcR_pNGNvdMD_DJsosclzYvCZSIeVvcSK4tRA')
+  console.log( truck )
   return (
     <div className="container-fluid LPTRacker">
       

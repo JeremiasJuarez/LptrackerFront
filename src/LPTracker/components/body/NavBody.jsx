@@ -8,7 +8,8 @@ import { RankIconLoader } from "../Loaders/RankIconLoader"
 export const NavBody = () => {
 
   //--Tomar puuid del context y funcion para establecer el fullprofile
-  const { summoner, setFullSummoner, fullProfile } = useContext(LptContext)
+  const { server, summoner, setFullSummoner, fullProfile } = useContext(LptContext)
+  //--useState para establecer valores del full profile en un estado propio del componente
   const [actProfile, setActProfile] = useState({})
 
 
@@ -16,24 +17,22 @@ export const NavBody = () => {
 
     if (!summoner?.puuid) return;
 
-    const fetchFullSummoner = async (puuid) => {
+    const fetchFullSummoner = async ( puuid, server) => {
       try {
-        const fullSummonerData = await getSummonerFullProfile(puuid);
+        const fullSummonerData = await getSummonerFullProfile(puuid,server);
         setFullSummoner(fullSummonerData);
-        console.log(fullSummonerData)
         setActProfile(fullSummonerData)
       } catch (error) {
         console.error("Error fetching full summoner profile:", error);
       }
     }
-    fetchFullSummoner(summoner.puuid);
+    fetchFullSummoner(summoner.puuid, server);
 
   }, [])
 
-  console.log(fullProfile?.rankedQueues?.tier)
-
-  const defaultIconUrl = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png'
-  const iconUrl = `https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/${actProfile?.profileIconId}.png`
+  // const iconUrl = `https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/${actProfile?.profileIconId}.png`
+  const iconUrl = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${ actProfile?.profileIconId }.jpg`
+  const iconUrl2 = `https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon${ actProfile?.profileIconId }.jpg?image=e_upscale,q_auto:good,f_webp,w_auto&v=1729058249`
 
   const capitalize = (text) => {
     if (!text) return text; // Si el texto está vacío o es undefined, devuelve tal cual
@@ -54,30 +53,38 @@ export const NavBody = () => {
     }
 
     if( act?.rankedQueues && !act.rankedQueues.soloqProfile ){
-      console.log( act )
       return 'Unranked'
     }
-  }
-
-  const rank = ( act, league ) => {
-    if ( league === 'Master' || 'Grandmaster' || 'Challenger'){
+    else{
       return ''
     }
-    if (act?.rankedQueues?.tier === 'unranked') {
-      return 'unranked'
+  }
+
+  const rank = ( act, lg ) => {
+
+    const inter = lg( act )
+
+    if (inter === 'Master' || inter === 'Grandmaster' || inter === 'Challenger') {
+      return '';
+    }
+    if (act?.rankedQueues?.tier === 'unranked' || inter.toLowerCase() === 'unranked' ) {
+      return ''
     }
     if (act?.rankedQueues?.soloqProfile) {
-      return capitalize(act?.rankedQueues?.soloqProfile.rank)
+      return act?.rankedQueues?.soloqProfile.rank
     }
     if (act?.rankedQueues?.queueType === 'RANKED_SOLO_5x5') {
-      return capitalize(act?.rankedQueues?.rank)
+      return act?.rankedQueues?.rank
     }
     if( act?.rankedQueues && !act.rankedQueues.soloqProfile ){
-      console.log( act )
+      return ''
+    }
+    else{
       return ''
     }
 
   }
+
 
   const rankIcon = (league) => {
 
@@ -112,6 +119,7 @@ export const NavBody = () => {
 
   }
 
+
   return (
 
     <>
@@ -122,25 +130,25 @@ export const NavBody = () => {
             <div className="navBody">
 
               {
-                !actProfile.id ? <ProfileIconLoader />
-                  : <img src={actProfile?.profileIconId ? iconUrl : defaultIconUrl} alt="sumIcon" className="sumIcon" />
+                !actProfile?.id ? <ProfileIconLoader />
+                  : <img src={ actProfile?.profileIconId ? iconUrl : iconUrl2  } alt="summonerIcon" className="sumIcon" />
               }
 
               <div className="summonerNameNavBody">
-                <span className="text">{summoner?.summonerName || 'Hide on bush'}</span>
-                <span style={{ display: "block" }}>{summoner?.tag || '#KR1'}</span>
+                <span className="text">{summoner?.summonerName || 'SummonerName...'}</span>
+                <span style={{ display: "block" }}>{summoner?.tag || '#Tag...'}</span>
               </div>
 
               <div className="d-flex flex-row justify-content-end rankDiv" style={{ width: "100%" }}>
 
                 {
-                  !actProfile.id ? <RankIconLoader />
+                  !actProfile?.id ? <RankIconLoader />
                     : (
                       <div className="d-flex flex-column me-2">
                         <img className="rankIcon" src={actProfile?.profileIconId ? rankIcon(league(actProfile)) : defaultIconUrl} alt="rankIcon" />
                         <div className="d-flex justify-content-center align-items-center">
 
-                          <span style={{ fontSize: "0.9rem", marginTop: "-0.5rem", textAlign: 'center'}}>{ league(actProfile) } { rank( actProfile, league(actProfile) ) }</span>
+                          <span style={{ fontSize: "0.9rem", marginTop: "-0.5rem", textAlign: 'center'}}>{ `${league(actProfile)} ${ rank( actProfile, league )} `}</span>
 
                         </div>
                       </div>

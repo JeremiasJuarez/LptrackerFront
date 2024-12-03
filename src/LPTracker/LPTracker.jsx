@@ -3,6 +3,7 @@ import '../../styles.css'
 import { NavBar, NavBody, LPTBody, Footer, EmptyLPTBody } from './components'
 import { LptContext } from '../Context/LptContext'
 import { LoadingBody } from './components/Loaders'
+import { getSummonerId } from '../Helpers/fetchApi'
 
 //?LoadingBody
 //*161 usecontext
@@ -10,7 +11,7 @@ import { LoadingBody } from './components/Loaders'
 
 export const LPTracker = () => {
 
-  const { summoner } = useContext( LptContext )
+  const { fullProfile } = useContext( LptContext )
 
   const [showComponent, setShowComponent] = useState(null);
 
@@ -39,7 +40,7 @@ export const LPTracker = () => {
 
   useEffect(() => {
     // Si no hay nombre de invocador, se muestra 'Home'
-    if (!summoner.summonerName) {
+    if (!fullProfile?.profileIconId) {
       setShowComponent('Home');
       return;
     }
@@ -55,7 +56,8 @@ export const LPTracker = () => {
     // Limpia el timeout
     return () => clearTimeout(timer);
 
-  }, [summoner.summonerName]);
+  }, [fullProfile.profileIconId]);
+
 
   return (
     <div className="container-fluid LPTRacker">
@@ -83,3 +85,4 @@ export const LPTracker = () => {
 //* mostrar este componente en ruta /robodexo#olp
 //* cambiar eventualmente el settimeout por una funcion que este pendiente de los valores en el context
 //* se debera mostrar el loading hasta que esten todos los valores
+        //? : showComponent === 'Body' ? (<><NavBody/><LPTBody/></>) mostrar cuando termine de implementar la opciuon de servidor

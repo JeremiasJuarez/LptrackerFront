@@ -3,7 +3,7 @@ import { filterMatch, filterQueueType } from "./filters"
 
 
 
-export const getSummonerFullProfile = async( puuid ) => {
+export const getSummonerFullProfile = async( puuid, server ) => {
 
     //*esta fn ejecuta todas las demas funciones y debe retornar el perfil completo del summoner
 
@@ -39,19 +39,18 @@ export const getSummonerFullProfile = async( puuid ) => {
 
     try {
         // Obtener información del summoner
-        const { summonerLong } = await getSummonerId(puuid);
+        const { summonerLong } = await getSummonerId(puuid, server);
         if (!summonerLong) {
-          throw new Error("Summoner data not found.");
+          throw  new Error("Summoner data not found.");
         }
     
         const { id, profileIconId } = summonerLong;
     
         // Obtener el perfil de ranking
-        const { rankProfile } = await getRankProfile(id);
+        const { rankProfile } = await getRankProfile(id, server);
         if (!rankProfile) {
           throw new Error("Rank profile not found.");
         }
-    
         const rankedQueues = filterQueueType(rankProfile);
     
         // Obtener las partidas
@@ -77,9 +76,9 @@ export const getSummonerFullProfile = async( puuid ) => {
     
         return summonerFullProfile;
       } catch (error) {
-        console.error("Error fetching summoner full profile:", error.message || error);
+        // console.error("Error fetching summoner full profile:", error.message || error);
         // Retorna un valor vacío o null en caso de error
-        return null;
+        throw error;
       }
 
 }
