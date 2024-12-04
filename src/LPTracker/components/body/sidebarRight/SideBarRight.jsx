@@ -25,7 +25,7 @@ export const SideBarRight = () => {
     }
   }
 
-  const champIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${'2'}.png`
+  // const champIcon = `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${'2'}.png`
 
   return (
     <section className="col-lg-4 col-12-md sideBarRight">
@@ -39,7 +39,7 @@ export const SideBarRight = () => {
           matches?.map( ( match, index ) =>     
           (
             <div  key={ index } className={`matchCard ${ getResult( match ) }`}  >
-              <img className="img-fluid champImg" src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${ match.champ }.png`} alt={`${match.champ.substr(0,4)}Icon`} />
+              <img className="img-fluid champImg" src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${ match.champId }.png`} alt={`${match.champ.substr(0,4)}Icon`} />
               <div className="matchInfo">
                 <p className={`matchLp${getResult(match)}`}>
                   { getResult(match) === 'Win' ? 'Victory'

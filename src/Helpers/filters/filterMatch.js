@@ -4,20 +4,27 @@
 
 import { getMatch } from "../fetchApi/getMatch"
 
-export const filterMatch = async( matchId = "", puuid = "" ) => {
+export const filterMatch = async (matchId = "", puuid = "") => {
 
-    const { match } = await getMatch( matchId )
+  try {
 
-    const summonerIndex = match.metadata.participants.indexOf( puuid )
+    const { match } = await getMatch(matchId)
 
-    const summonerInfo = match.info.participants[ summonerIndex ]
+    if (!match) {
+      throw new Error('Match not found', error)
+    }
+
+    const summonerIndex = match.metadata.participants.indexOf(puuid)
+
+    const summonerInfo = match.info.participants[summonerIndex]
     const champ = summonerInfo.championName
+    const champId = summonerInfo.championId
     const gameMode = match.info.gameMode
     const kills = summonerInfo.kills
     const deaths = summonerInfo.deaths
     const assists = summonerInfo.assists
-    const isRemake = ( match.info.gameDuration < 240 ? true : false )
-    const result = ( summonerInfo.win === true ? 'Win' : "Loss" )
+    const isRemake = (match.info.gameDuration < 240 ? true : false)
+    const result = (summonerInfo.win === true ? 'Win' : "Loss")
 
     let queueType = "";
     if (match.info.queueId === 420) {
@@ -30,8 +37,13 @@ export const filterMatch = async( matchId = "", puuid = "" ) => {
       queueType = "Normal Game";
     } else {
       queueType = "Normal Game";
-    }              
+    }
 
-    const matchInfo = { kills, deaths, assists, isRemake, result, champ, gameMode, queueType }
+    const matchInfo = { kills, deaths, assists, isRemake, result, champ, champId, gameMode, queueType }
     return matchInfo
+
+  } catch (error) {
+    return { error: error.message || "An unexpected error occurred" }
+  }
+
 }

@@ -4,6 +4,7 @@ import { LptContext } from "../../../Context/LptContext"
 import { SummonerNotFound } from "./SummonerNotFound"
 import { DropDownServer } from "./DropDownServer";
 import { getSummonerFullProfile } from "../../../Helpers/getSummonerFullProfile";
+import { LoadingSearchButton } from "../Loaders/LoadingSearchButton";
 
 const initialErrorState = {
   hasError: false,
@@ -98,8 +99,11 @@ export const NavBar = () => {
               type="submit" 
               className="searchButton"
               disabled={ submiting }
-            >
-              <i className="fa-solid fa-magnifying-glass" blank="SearchLogo"></i>
+            > 
+              {
+                submiting? <LoadingSearchButton/>
+                :<i className="fa-solid fa-magnifying-glass" blank="SearchLogo"></i>
+              }
             </button>
           </form>
         </div>

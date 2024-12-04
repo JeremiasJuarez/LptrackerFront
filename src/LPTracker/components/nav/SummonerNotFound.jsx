@@ -1,6 +1,5 @@
 
 export const SummonerNotFound = ( {summonerName, tag, error}  ) => {
-
   return(
     <div className="notFoundComponent">
       <p className="m-1">

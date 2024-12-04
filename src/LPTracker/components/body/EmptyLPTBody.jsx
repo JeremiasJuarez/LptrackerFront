@@ -57,23 +57,23 @@ export const EmptyLPTBody = () => {
           <p>See some famous streamers profiles</p>
         </div>
         <div className='profiles'>
-          <div onClick={ onClickStreamer }> 
+          <div onClick={ onClickStreamer } value={ 'Trick2g' }> 
             <p>Trick2g</p> 
             <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Udyr.png" alt="udyrIcon" />
           </div>
-          <div onClick={ onClickStreamer }>
+          <div onClick={ onClickStreamer } value={ 'KayPea' }>
             <p>KayPea</p>
             <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Lux.png" alt="luxIcon" />
           </div>
-          <div onClick={ onClickStreamer }> 
+          <div onClick={ onClickStreamer } value={ 'Tyler1' }> 
             <p>Tyler1</p> 
             <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Draven.png" alt="dravenIcon" />
           </div>
-          <div onClick={ onClickStreamer }>
+          <div onClick={ onClickStreamer } value={ 'Annie' }>
             <p>Annie</p>
             <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Akali.png" alt="akaliIcon" />
           </div>
-          <div onClick={ onClickStreamer }>
+          <div onClick={ onClickStreamer } value={ 'TFBlade' }>
             <p>TFBlade</p>
             <img src="https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/Jax.png" alt="jaxIcon" />
           </div>
